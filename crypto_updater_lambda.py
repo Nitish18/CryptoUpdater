@@ -31,7 +31,7 @@ def on_intent(intent_request, session):
     if intent_name == "intro":
         return get_intro()
 
-    elif intent_name == "coin_price":
+    elif intent_name == "price_coin":
         return get_coin_price(intent)     
         
     # predefined intents
@@ -80,7 +80,7 @@ def get_coin_price(intent):
     session_attributes = {}
     card_title = "Crypto Updater Status"
     speech_output = "Sorry, could not get you ! Can you please try again !! Try speaking name of the coin of which you want to know the price."
-    reprompt_text = "Sorry, could not get you ! Can you please try again !! Try speaking name of the coin of which you want to know the price."
+    reprompt_text = ""
     should_end_session = False
 
     API_URL = 'https://chasing-coins.com/api/v1/std/coin/'
@@ -98,34 +98,34 @@ def get_coin_price(intent):
                 coin_price = api_json_body.get('price',"NA")
             except:
                 pass 
-            speech_output = "The price of one" + coin_name + 'is' + coin_price + " dollars"
+            speech_output = "The price of one  " + coin_name + '  is  ' + coin_price + " dollars"
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
 
-def coin_code(coin_name):
+def get_coin_code(coin_name):
     # mapping between coin name & it's code
     coin_mapping = {
-      "VIBE" : "VIBE",
-      "Request Network" : "REQ",
-      "Power Ledger" : "POWR",
-      "BitShares" : "BTS",
-      "Tether" : "USDT",
-      "Bitcoin Gold" : "BTG",
-      "NEM" : "XEM",
-      "TRON" : "TRX ",
-      "VeChain" : "VEN",
-      "Dash" : "DASH",
-      "Monero" : "XMR",
-      "IOTA" : "MIOTA",
-      "Stellar" : "XLM",
-      "NEO" : "NEO",
-      "Cardano" : "ADA",
-      "Litecoin" : "LTC",
-      "Bitcoin cash" : "BCH",
-      "Ripple" : "XRP",
-      "Ethereum" : "ETH ",
-      "Bitcoin" : "BTC"
+      "vibe" : "VIBE",
+      "request network" : "REQ",
+      "power ledger" : "POWR",
+      "bitShares" : "BTS",
+      "tether" : "USDT",
+      "bitcoin gold" : "BTG",
+      "nem" : "XEM",
+      "tron" : "TRX ",
+      "vechain" : "VEN",
+      "dash" : "DASH",
+      "monero" : "XMR",
+      "iota" : "MIOTA",
+      "stellar" : "XLM",
+      "neo" : "NEO",
+      "cardano" : "ADA",
+      "litecoin" : "LTC",
+      "bitcoin cash" : "BCH",
+      "ripple" : "XRP",
+      "ethereum" : "ETH ",
+      "bitcoin" : "BTC"
     }
     if str(coin_name) in coin_mapping:
         return coin_mapping[coin_name]
