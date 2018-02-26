@@ -59,7 +59,7 @@ def get_welcome_response():
                     "You can ask me about prices of different Crypto Currencies" 
                     
     reprompt_text = "Please ask me about price of different coins" \
-                    "for example Bitcoin."
+                    "for example bitcoin"
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
@@ -80,7 +80,7 @@ def get_coin_price(intent):
     session_attributes = {}
     card_title = "Crypto Updater Status"
     speech_output = "Sorry, could not get you ! Can you please try again !! Try speaking name of the coin of which you want to know the price."
-    reprompt_text = ""
+    reprompt_text = "Sorry, could not get you ! Can you please try again !! Try speaking name of the coin of which you want to know the price."
     should_end_session = False
 
     API_URL = 'https://chasing-coins.com/api/v1/std/coin/'
@@ -99,6 +99,8 @@ def get_coin_price(intent):
             except:
                 pass 
             speech_output = "The price of one  " + coin_name + '  is  ' + coin_price + " dollars"
+            should_end_session = True
+            reprompt_text = ""
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
